@@ -1,0 +1,189 @@
+###############################################################################
+# pypm.lock — unified graph, generated 2025-06-25T03:42-04:00 by pypm 0.1-alpha
+# Lock format 1.0 (experimental)
+###############################################################################
+
+[metadata]
+python         = "3.10"
+lock-version   = "1.0"
+content-hash   = "sha256:TO-REGENERATE"        # changes whenever any wheel/hashes change
+generated-with = "pypm 0.1-alpha"
+
+[source]
+name       = "pypi"
+url        = "https://pypi.org/simple"
+verify-ssl = true
+
+###############################################################################
+# Runtime dependencies (group = "default")
+###############################################################################
+
+[[package]]
+name    = "certifi"
+version = "2025.4.15"
+group   = "default"
+files   = [
+  { file = "certifi-2025.4.15-py3-none-any.whl",
+    hash = "sha256:bf27f4e77ec1b3a1b87a3db6d415d8d2ba2351ba4beaf709f580dab480bb6f7e",
+    size = 161599 },
+]
+
+[[package]]
+name    = "charset-normalizer"
+version = "3.4.1"
+group   = "default"
+files   = [
+  { file = "charset_normalizer-3.4.1-py3-none-any.whl",
+    hash = "sha256:64b6adc1eb83c1abcebf73a706c4d3d1dd1664adec149e64b4c06bd01f54b024",
+    size = 39552 },
+]
+
+[[package]]
+name    = "filelock"
+version = "3.18.0"
+group   = "default"
+files   = [
+  { file = "filelock-3.18.0-py3-none-any.whl",
+    hash = "sha256:c401f4f8377c4464e6db25fff06205fd89bdd83b65eb0488ed1b160f780e21de",
+    size = 16618 },
+]
+
+[[package]]
+name    = "idna"
+version = "3.7"
+group   = "default"
+files   = [
+  { file = "idna-3.7-py3-none-any.whl",
+    hash = "sha256:3baf6e7027fc7f8802c176c00d83a34c3e3bd42ca699e2cb18c2260c9e34a889",
+    size = 62949 },
+]
+
+[[package]]
+name    = "networkx"
+version = "3.5"
+group   = "default"
+files   = [
+  { file = "networkx-3.5-py3-none-any.whl",
+    hash = "sha256:0030d386a9a06dee3565298b4a734b68589749a544acbb6c412dc9e2489ec6ec",
+    size = 222019 },    # ≈216 KiB
+]
+
+[[package]]
+name    = "requests"
+version = "2.32.3"
+group   = "default"
+dependencies = [
+  "charset-normalizer==3.4.1",
+  "idna==3.7",
+  "urllib3==2.3.0",
+  "certifi==2025.4.15",
+]
+files = [
+  { file = "requests-2.32.3-py3-none-any.whl",
+    hash = "sha256:8be5b0f8d57f9a5f80f692162e8f8ab65cf6835963d91fd1ffe49d4aa469af9a",
+    size = 64915 },
+]
+
+[[package]]
+name    = "sympy"
+version = "1.12"
+group   = "default"
+files   = [
+  { file = "sympy-1.12-py3-none-any.whl",
+    hash = "sha256:TODO-sha256",
+    size = 0 },
+]
+
+[[package]]
+name    = "torch"
+version = "2.3.1"
+group   = "default"
+dependencies = [
+  "filelock>=3.12,<4",
+  "sympy>=1.12",
+  "typing-extensions>=4.0,<5",
+  "networkx>=3.1",
+]
+files = [
+  { file = "torch-2.3.1-cp310-cp310-manylinux1_x86_64.whl",
+    hash = "sha256:605a25b23944be5ab7c3467e843580e1d888b8066e5aaf17ff7bf9cc30001cc3",
+    size = 779100000 },
+]
+
+[[package]]
+name    = "typing-extensions"
+version = "4.11.0"
+group   = "default"
+files   = [
+  { file = "typing_extensions-4.11.0-py3-none-any.whl",
+    hash = "sha256:TODO-sha256",
+    size = 0 },
+]
+
+[[package]]
+name    = "urllib3"
+version = "2.3.0"
+group   = "default"
+dependencies = [
+  "brotli>=1.0.9; python_version >= '3.8' and platform_python_implementation != 'PyPy'",
+]
+files = [
+  { file = "urllib3-2.3.0-py3-none-any.whl",
+    hash = "sha256:bd934357d06003f796e18bd33f9af2ed1a3f8af85bd80520012d1db9178efc9b",
+    size = 119152 },
+]
+
+###############################################################################
+# Development-only dependencies  (group = "dev")
+###############################################################################
+
+[[package]]
+name    = "black"
+version = "24.4.2"
+group   = "dev"
+dependencies = [
+  "click>=8.0.0",
+  "mypy-extensions>=0.4.3",
+  "pathspec>=0.11.0",
+  "platformdirs>=3.2.0",
+]
+files = [
+  { file = "black-24.4.2-cp310-cp310-manylinux_2_17_x86_64.whl",
+    hash = "sha256:1186b8cc4b2e9cfb780914af33a6e478a05ecca04baf2d9d1319a7f9b2be2105",
+    size = 174251 },
+]
+
+[[package]]
+name    = "mypy"
+version = "1.10.2"
+group   = "dev"
+dependencies = [
+  "mypy-extensions>=1.0.0",
+  "tomli>=2.0.1; python_version < '3.11'",
+  "typing-extensions>=4.7.0",
+]
+files = [
+  { file = "mypy-1.10.2-cp310-cp310-manylinux_2_17_x86_64.whl",
+    hash = "sha256:b61f0b5c1c16fa7c8d6370d803742dc9525f2d20ef78c3e806d9116622feca46",
+    size = 2142278 },
+]
+
+[[package]]
+name    = "pytest"
+version = "8.0.0"
+group   = "dev"
+dependencies = [
+  "exceptiongroup>=1.2.0; python_version < '3.12'",
+  "iniconfig>=2.0",
+  "packaging>=23.2",
+  "pluggy>=1.5",
+]
+files = [
+  { file = "pytest-8.0.0-py3-none-any.whl",
+    hash = "sha256:27b2e15567c25f3836a8242101bcb30d4ef7a61f2b644ba02f6c1e13e361e762",
+    size = 514825 },
+]
+
+###############################################################################
+# END OF FILE — regenerate via `pypm lock` when deps or hashes change.         #
+###############################################################################
