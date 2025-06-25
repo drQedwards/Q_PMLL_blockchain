@@ -122,3 +122,68 @@ Rust’s `uv`, then bakes them into a single, ultra-portable binary:
                        │ Env Mgr   │      │ Plugin Host│
                        │ (.venv)   │      │ (dlopen)   │
                        └──────────┘      └────────────┘
+
+# 📝 pypm — Release Notes
+
+---
+
+## 0.0.3-dev  •  25 Jun 2025
+
+### ✨ New & Improved
+| Area | What’s new |
+|------|------------|
+| **Unified source** | v0.0.1 + v0.0.2 code paths merged into **one file** (`pypm.c`) to simplify builds and downstream patches. |
+| **Version bump** | Internal string now reports `0.0.3-dev`. |
+| **Workspace override** | Honors `PYP_WORKSPACE_ROOT` **and** still climbs for `pypm-workspace.toml`. |
+| **Doctor v2.1** | • Counts issues & exits with that value<br>• Inline Python probe now uses a here-doc (no temp files). |
+| **Sandbox v2.1** | `-d <DIR>` flag lets you drop directly into any folder; default remains `mkdtemp`. |
+| **Plugin fetcher hardening** | • Creates `~/.pypm/plugins` if missing (POSIX + EEXIST safe)<br>• `CURLOPT_FAILONERROR` aborts on HTTP 4xx/5xx<br>• Preserves plugin’s **exit code** for CI. |
+| **Hermetic bundle flag** | `pypylock -o <file>` works regardless of flag order; default target is `dist/venv.tar.gz`. |
+| **Error surfacing** | `fatal()` now prints underlying `errno` via `perror`, and most `dlopen`/`curl` errors bubble up plainly. |
+
+### 🐞 Fixes
+* CLI flags after sub-commands were occasionally skipped by `getopt` → now we set `optind = 2` before parsing sandbox / pypylock options.
+* Plugin loader printed success even when `dlsym` failed → now returns non-zero and closes the handle.
+* Workspace scan no longer trashes `cwd` for later `getcwd()` calls.
+
+### ⚠️ Breaking Changes
+1. **Version command** ‐ still a sub-command (`pypm version`), but scripts that grepped `0.0.2` must update.
+2. **Doctor exit codes** ‐ same semantics as 0.0.2, but remember the number can now be >1.
+
+### 🛠 Migration Guide (0.0.2 → 0.0.3-dev)
+| If you did … | Do this now |
+|--------------|-------------|
+| `./pypm doctor && echo OK` | Check for non-zero exit (`[[ $? -eq 0 ]]`) _or_ parse the numeric count. |
+| Relied on separate `pypm_v002.c` / `pypm_v001.c` | Switch to single `pypm.c`, `make clean ; make`. |
+| Hard-coded `dist/venv.tar.gz` in deploy scripts | Pass `-o` if you need a different path. |
+
+### 🗺 Known Issues
+* **Windows** build still needs: `LoadLibraryW`, `_mktemp_s`, `bsdtar.exe` fallback. Tracked in [#22].
+* `pypylock` uses shell `tar`; systems without BSD/GNU tar will fail. `libarchive` port slated for 0.0.4.
+* WASI/Rust/OpenSSL checks are stubs (informational only).
+
+### 🙌 Thanks
+* **Dr. Josef K. Edwards** for the merge-fest and design shepherding.
+* **@bytebender** for POSIX mkdir patch.
+* **@kittenOps** for the `CURLOPT_FAILONERROR` heads-up.
+
+---
+
+## 0.0.2  •  25 Jun 2025  
+(unchanged since previous notes)
+
+* Workspace autodetect, Doctor v2, Sandbox upgrade, Plugin add/run, pypylock `-o`.
+* Breaking: `--version` flag removed; doctor exits non-zero on issues.
+
+## 0.0.1  •  23 Jun 2025  
+Initial proof-of-concept, single-file CLI with basic doctor / sandbox / plugin / pypylock commands.
+
+---
+
+### 🔮 Next up (0.0.4 roadmap tease)
+1. **Lockfile parser + wheel copier** for real hermetic bundles.  
+2. **libsolv**-backed dependency resolver.  
+3. Cross-platform shims (Win/Mac).  
+4. WASI toolchain detection & wheel preference.
+
+Stay tuned — or open a PR to help make it happen! 🚀
