@@ -1,0 +1,82 @@
+# pyproject.toml ───────────────────────────────────────────────────────────────
+# Canonical project metadata + fully-inlined pypm configuration
+# -----------------------------------------------------------------------------
+
+[project]
+name            = "my-lib"
+version         = "0.1.0"
+description     = "Experimental library used to dog-food the pypm prototype"
+readme          = "README.md"
+requires-python = ">=3.10"
+license         = { text = "MIT" }
+
+authors = [
+  { name = "Dr. Josef Kurk Edwards", email = "josef@example.com" },
+]
+keywords = ["pypm", "package-manager", "proof-of-concept"]
+
+dependencies = [
+  # Runtime deps
+  "requests>=2.32",
+  # TOML parser for Python <3.11 (tomllib built-in after that)
+  "tomli>=2.0; python_version < '3.11'",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+  "black>=24.0",
+  "mypy>=1.10",
+]
+
+# -----------------------------------------------------------------------------
+# Build backend — setuptools is fine for a pure-Python src/ layout
+# -----------------------------------------------------------------------------
+[build-system]
+requires = ["setuptools>=69", "wheel>=0.43"]
+build-backend = "setuptools.build_meta"
+
+# -----------------------------------------------------------------------------
+# pypm — every knob lives here now
+# -----------------------------------------------------------------------------
+[tool.pypm]
+python = "^3.10"                # interpreter constraint
+
+  # Virtual-env placement
+  [tool.pypm.venv]
+  path = ".venv"
+
+  # Lock-file settings
+  [tool.pypm.lock]
+  file = "pypm.lock"
+
+  # Shared artefact cache
+  [tool.pypm.cache]
+  wheel_dir = "~/.cache/pypm/wheels"
+
+  # Environment variables injected into `pypm run` / `pypm shell`
+  [tool.pypm.env]
+  PYP_DEBUG = "1"
+
+  # Plugin list (array-of-tables preserves per-plugin options)
+  [[tool.pypm.plugins]]
+  name = "auditwheel"
+    [tool.pypm.plugins.opts]
+    platform = "manylinux2014_x86_64"
+
+  [[tool.pypm.plugins]]
+  name = "s3cache"
+    [tool.pypm.plugins.opts]
+    bucket = "my-lib-wheels"
+    region = "us-east-1"
+
+# -----------------------------------------------------------------------------
+# Formatting / linting (optional)
+# -----------------------------------------------------------------------------
+[tool.black]
+line-length    = 88
+target-version = ["py310"]
+
+[tool.isort]
+profile            = "black"
+known_first_party  = ["my_lib"]      # adjust if import package is different
