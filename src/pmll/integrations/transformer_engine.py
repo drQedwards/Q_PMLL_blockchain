@@ -28,7 +28,8 @@ try:
 except ImportError:
     TRANSFORMERS_AVAILABLE = False
 
-from ..core.memory_pool import PMLLMemoryPool, CompressionLevel
+from ..core.memory_pool import PMLLMemoryPool
+from ..core.enums import CompressionLevel
 from ..core.promises import Promise, PromiseQueue
 from ..core.pmll_solver import PMLLSATSolver
 from ..core.metrics import global_metrics, global_profiler
