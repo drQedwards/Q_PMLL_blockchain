@@ -26,13 +26,7 @@ from .hash_functions import ConsistentHasher
 from .metrics import MemoryMetrics
 
 
-class CompressionLevel(Enum):
-    """Compression levels for memory optimization"""
-    NONE = 0
-    LOW = 1
-    BALANCED = 2
-    AGGRESSIVE = 3
-    MAX = 4
+from .enums import CompressionLevel
 
 
 @dataclass
