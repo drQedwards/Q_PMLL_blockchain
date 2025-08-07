@@ -12,7 +12,8 @@ try:
 except ImportError:
     __version__ = "unknown"
 
-from .core.memory_pool import PMLLMemoryPool, CompressionLevel
+from .core.memory_pool import PMLLMemoryPool
+from .core.enums import CompressionLevel
 from .core.compression import MemoryCompressionEngine
 from .core.promises import Promise, PromiseQueue
 from .core.pmll_solver import PMLLSATSolver
