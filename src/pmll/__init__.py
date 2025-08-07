@@ -17,26 +17,20 @@ from .core.enums import CompressionLevel
 from .core.compression import MemoryCompressionEngine
 from .core.promises import Promise, PromiseQueue
 from .core.pmll_solver import PMLLSATSolver
-# Storage
 from .storage.base import StorageBackend
-# Optional backends - import only if available
+
+# API components - optional
 try:
-    from .storage.redis_backend import RedisStorageBackend
+    from .api.app import create_app
 except ImportError:
-    RedisStorageBackend = None
+    create_app = None
 
+# Integrations - optional
 try:
-    from .storage.postgres_backend import PostgreSQLStorageBackend  
+    from .integrations.transformer_engine import TransformerEngine, ModelManager
 except ImportError:
-    PostgreSQLStorageBackend = None
-
-# API components
-from .api.app import create_app
-
-# Integrations
-from .integrations.pytorch import PMLLMultiheadAttention
-from .integrations.huggingface import PMLLBertAttention
-from .integrations.transformer_engine import TransformerEngine
+    TransformerEngine = None
+    ModelManager = None
 
 __all__ = [
     "__version__",
@@ -49,14 +43,10 @@ __all__ = [
     "PMLLSATSolver",
     # Storage
     "StorageBackend",
-    "RedisStorageBackend", 
-    "PostgreSQLStorageBackend",
-    # API
+    # Optional components (may be None if dependencies missing)
     "create_app",
-    # Integrations
-    "PMLLMultiheadAttention",
-    "PMLLBertAttention",
     "TransformerEngine",
+    "ModelManager",
 ]
 
 # Package metadata
