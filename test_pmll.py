@@ -66,6 +66,7 @@ async def main():
         manager = ModelManager()
         config = ModelConfig(
             model_id="gpt2",
+            model_size=ModelSize.SMALL,
             use_pmll_memory=True,
             device="cpu"
         )
