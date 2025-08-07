@@ -1,0 +1,11 @@
+include README.md
+include LICENSE
+include CHANGELOG.md
+include pyproject.toml
+recursive-include src/pmll/templates *.html
+recursive-include src/pmll/static *
+recursive-include src/pmll/migrations *.sql
+recursive-include docs *.rst *.md *.py
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
+recursive-exclude * .DS_Store
