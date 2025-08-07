@@ -15,6 +15,7 @@ from pmll.core.memory_pool import PMLLMemoryPool
 from pmll.core.enums import CompressionLevel
 from pmll.core.pmll_solver import PMLLSATSolver
 from pmll.integrations.transformer_engine import ModelManager, ModelConfig
+from pmll.core.enums import ModelSize
 
 async def main():
     print("🧠 PMLL AI Model Test")
