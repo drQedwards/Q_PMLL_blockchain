@@ -17,9 +17,18 @@ from .core.enums import CompressionLevel
 from .core.compression import MemoryCompressionEngine
 from .core.promises import Promise, PromiseQueue
 from .core.pmll_solver import PMLLSATSolver
+# Storage
 from .storage.base import StorageBackend
-from .storage.redis_backend import RedisStorageBackend
-from .storage.postgres_backend import PostgreSQLStorageBackend
+# Optional backends - import only if available
+try:
+    from .storage.redis_backend import RedisStorageBackend
+except ImportError:
+    RedisStorageBackend = None
+
+try:
+    from .storage.postgres_backend import PostgreSQLStorageBackend  
+except ImportError:
+    PostgreSQLStorageBackend = None
 
 # API components
 from .api.app import create_app
