@@ -1,0 +1,28 @@
+content = textwrap.dedent(f"""\
+    # pypm.ven — virtual environment manifest
+    # Auto‑generated on {datetime.utcnow().isoformat(timespec='seconds')}Z
+    #
+    # This file describes the virtual‑env that pypm should recreate.
+    # It intentionally mirrors fields from Pypm.toml and Pypm.lock.
+    #
+    [env]
+    python_version = "3.11"
+    platform       = "linux-x86_64"
+    venv_path      = ".venv"
+    
+    [sources.default]
+    url    = "https://pypi.org/simple"
+    verify = true
+    
+    [dependencies]
+    numpy = "1.28.2"
+    httpx = "0.27.0"
+    
+    [optional.test]
+    pytest = "9.0.0"
+    """)
+    
+path = "/mnt/data/Pypm.ven"
+with open(path, "w") as f:
+    f.write(content)
+path
