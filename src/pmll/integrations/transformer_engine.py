@@ -35,12 +35,7 @@ from ..core.pmll_solver import PMLLSATSolver
 from ..core.metrics import global_metrics, global_profiler
 
 
-class ModelSize(Enum):
-    """Model size categories"""
-    SMALL = "small"      # < 1B parameters
-    MEDIUM = "medium"    # 1B - 7B parameters  
-    LARGE = "large"      # 7B - 30B parameters
-    XLARGE = "xlarge"    # 30B+ parameters
+from ..core.enums import ModelSize
 
 
 @dataclass
