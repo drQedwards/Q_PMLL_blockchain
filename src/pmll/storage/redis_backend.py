@@ -7,10 +7,16 @@ from typing import Any, Optional
 from .base import StorageBackend
 
 try:
-    import aioredis
+    # Use redis instead of aioredis to avoid version conflicts
+    import redis.asyncio as aioredis
     REDIS_AVAILABLE = True
 except ImportError:
-    REDIS_AVAILABLE = False
+    try:
+        import aioredis
+        REDIS_AVAILABLE = True
+    except ImportError:
+        REDIS_AVAILABLE = False
+        aioredis = None
 
 
 class RedisStorageBackend(StorageBackend):
