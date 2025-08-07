@@ -18,7 +18,7 @@ try:
 except ImportError:
     TORCH_AVAILABLE = False
 
-from .memory_pool import CompressionLevel
+from .enums import CompressionLevel
 
 
 class CompressionAlgorithm(Enum):
